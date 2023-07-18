@@ -70,8 +70,9 @@ namespace MovieRentalTDD
         //Additional Method
         public string StatementRefactored()
         {
-            double totalAmount = 0;
             int frequentRenterPoints = 0;
+            double totalAmount = 0;
+
             IEnumerator<Rental> rentalsEnum = this.Rentals.GetEnumerator();
             string result = "Rental Record for " + Name + "\n";
 

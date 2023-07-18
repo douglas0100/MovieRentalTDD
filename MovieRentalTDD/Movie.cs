@@ -58,7 +58,7 @@ namespace MovieRentalTDD
         {
             int frequentRenterPoints = 1;
 
-            if ((PriceCode == Movie.NEW_RELEASE) && (daysRented > 1))
+            if ((PriceCode == NEW_RELEASE) && (daysRented > 1))
             {
                 frequentRenterPoints++;
             }
