@@ -67,7 +67,7 @@ namespace MovieRentalTDD
         }
 
 
-
+        //Additional Method
         public string StatementRefactored()
         {
             double totalAmount = 0;
@@ -78,12 +78,10 @@ namespace MovieRentalTDD
             while (rentalsEnum.MoveNext())
             {
                 Rental rental = rentalsEnum.Current;
-                double thisAmount = GetAmount(rental);
-                frequentRenterPoints++;
-                if ((rental.Movie.PriceCode == Movie.NEW_RELEASE) && (rental.DaysRented > 1))
-                {
-                    frequentRenterPoints++;
-                }
+
+                double thisAmount = rental.GetAmount();
+                frequentRenterPoints += rental.GetFrenquentRenterPoints();
+
                 result += "\t" + rental.Movie.Title + "\t" + thisAmount.ToString() + "\n";
                 totalAmount += thisAmount;
             }
@@ -94,6 +92,20 @@ namespace MovieRentalTDD
             return result;
         }
 
+        //Additional Method
+        private static int GetFrenquentRenterPoints(Rental rental)
+        {
+            int frequentRenterPoints = 1;
+
+            if ((rental.Movie.PriceCode == Movie.NEW_RELEASE) && (rental.DaysRented > 1))
+            {
+                frequentRenterPoints++;
+            }
+
+            return frequentRenterPoints;
+        }
+
+        //Additional Method
         private static double GetAmount(Rental rental)
         {
             double amount = 0;

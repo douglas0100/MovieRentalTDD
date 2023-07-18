@@ -16,7 +16,7 @@ namespace MovieRentalTests
         [TestMethod]
         public void TestNameCreation()
         {
-            string result = client.Statement();
+            string result = client.StatementRefactored();
             Assert.IsTrue(result.Contains("Rental Record for John"));
         }
 
@@ -24,7 +24,7 @@ namespace MovieRentalTests
         public void TestOneRegularOneDay()
         {
             RentMovie("Indiana Jones", Movie.REGULAR, 1);
-            string result = client.Statement();
+            string result = client.StatementRefactored();
             Assert.IsTrue(result.Contains("Amount owed is 2"));
             Assert.IsTrue(result.Contains("You earned 1 frequent renter points"));
         }
@@ -33,7 +33,7 @@ namespace MovieRentalTests
         public void TestOneRegularThreeDays()
         {
             RentMovie("Indiana Jones", Movie.REGULAR, 3);
-            string result = client.Statement();
+            string result = client.StatementRefactored();
             Assert.IsTrue(result.Contains("Amount owed is 3,5"));
             Assert.IsTrue(result.Contains("You earned 1 frequent renter points"));
         }
@@ -42,7 +42,7 @@ namespace MovieRentalTests
         public void TestOneChildrensFiveDays()
         {
             RentMovie("Procurando Nemo", Movie.CHILDRENS, 5);
-            string result = client.Statement();
+            string result = client.StatementRefactored();
             Assert.IsTrue(result.Contains("Amount owed is 4,5"));
             Assert.IsTrue(result.Contains("You earned 1 frequent renter points"));
         }
@@ -51,9 +51,19 @@ namespace MovieRentalTests
         public void TestOneNewReleaseOneDay()
         {
             RentMovie("Vingadores", Movie.NEW_RELEASE, 1);
-            string result = client.Statement();
+            string result = client.StatementRefactored();
             Assert.IsTrue(result.Contains("Amount owed is 3"));
             Assert.IsTrue(result.Contains("You earned 1 frequent renter points"));
+        }
+
+        //Additional test 
+        [TestMethod]
+        public void TestOneNewReleaseTwoDays()
+        {
+            RentMovie("Vingadores", Movie.NEW_RELEASE, 2);
+            string result = client.StatementRefactored();
+            Assert.IsTrue(result.Contains("Amount owed is 6"));
+            Assert.IsTrue(result.Contains("You earned 2 frequent renter points"));
         }
 
         private void RentMovie(string title, int type, int days)

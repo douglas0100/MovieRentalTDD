@@ -18,5 +18,17 @@ namespace MovieRentalTDD
             DaysRented = daysRented;
         }
 
+        //Additional Method
+        public double GetAmount()
+        {
+            return Movie.GetAmount(DaysRented);
+        }
+
+        //Additional Method
+        public int GetFrenquentRenterPoints()
+        {
+            return Movie.GetFrenquentRenterPoints(DaysRented);
+        }
+
     }
 }
